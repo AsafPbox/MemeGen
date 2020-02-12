@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>UltimateMemeCreator</title>
 </head>
-<body>
-    
 
+<body onload="init()">
+    <header>
+        <h3>MemeGen</h3>
+    </header>
+    <img src="img/1.jpg" id="img01" onclick="showGen()">
+    <div class="MemeGen" style="display: none">
+        <div class="canvas-container">
+            <button onclick="changeLine()">ChangeLine</button>
+            <input type="text" id="topline" name="topline" placeholder="Enter text here">
+            <canvas id="my-canvas" height="550" width="550" onclick="draw()" style="border: 1px solid black;"></canvas>
+        </div>
+    </div>
+
+    <script src="js/memeService.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
