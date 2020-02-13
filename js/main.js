@@ -3,6 +3,8 @@
 // default values :
 
 var gDefaultFontSize = 40;
+var gDefaultFontSizeUpperLine;
+var gDefaultFontSizeLowerLine;
 var gDefaultUpperLinePos = { posX: 50, posY: 50 };
 var gDefaultLowerLinePos = { posX: 50, posY: 500 };
 
@@ -19,13 +21,13 @@ var gMeme = {
     lines: [
         {
             txt: '',
-            size: gDefaultFontSize,
+            size: gDefaultFontSizeUpperLine,
             align: '',
             color: ''
         },
         {
             txt: '',
-            size: gDefaultFontSize,
+            size: gDefaultFontSizeLowerLine,
             align: '',
             color: ''
         }
