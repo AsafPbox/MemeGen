@@ -107,10 +107,12 @@ function moveLineUp() {
         console.log(gDefaultUpperLinePos.posY)
         if (gDefaultUpperLinePos.posY <= 35) return
         gDefaultUpperLinePos.posY -= 5;
+        drawImg()
     }
     else if (getCurrentLine() === 1) {
         if (gDefaultLowerLinePos.posY <= 35) return;
         gDefaultLowerLinePos.posY -= 5;
+        drawImg()
     }
 }
 function moveLineDown() {
@@ -118,10 +120,12 @@ function moveLineDown() {
         console.log(gDefaultUpperLinePos.posY)
         if (gDefaultUpperLinePos.posY === 495) return;
         gDefaultUpperLinePos.posY += 5;
+        drawImg()
     }
     else if (getCurrentLine() === 1) {
         if (gDefaultLowerLinePos.posY === 495) return;
         gDefaultLowerLinePos.posY += 5;
+        drawImg()
     }
 }
 
@@ -129,11 +133,13 @@ function moveLineDown() {
 function increaseFontSize() {
     if (gDefaultFontSize === 55) return;
     gDefaultFontSize += 5;
+    drawImg()
     console.log(gDefaultFontSize)
 }
 function decreaseFontSize() {
     if (gDefaultFontSize === 35) return;
     gDefaultFontSize -= 5;
+    drawImg()
     console.log(gDefaultFontSize)
 }
 
