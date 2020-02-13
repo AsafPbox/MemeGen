@@ -4,15 +4,61 @@
 }
 
 * {
-    font-family: Impact;
+    font-family: Arial, sans-serif;
 }
 
 html {
     background-color: lightgray;
 }
 
+header {
+    background-color: lightblue;
+}
+
+.image-gallery {
+    margin: 5px 5px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 20vw);
+    grid-gap: 15px;
+}
+
+.image-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.MemeGen {
+    margin: 5px 5px;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 100%;
+    grid-gap: 15px;
+}
+
+.canvas-buttons {
+    grid-row: 1 / -1;
+    grid-column: 1 / 1;
+}
+
+.canvas-container {
+    grid-row: 1 / -1;
+    grid-column: 1 / 1;
+}
+
 canvas {
     background-color: white;
-    display: block;
+    /* display: block; */
     margin: 20px auto;
+}
+
+footer {
+    background-color: lightblue;
+    text-align: center;
+    padding : 40px;
+}
+
+/* Helpers */
+
+.grid {
+    display: grid;
 }

@@ -16,7 +16,3 @@ var gImgs = [
 function getImg(imgId){
     return gImgs.find(img => imgId === img.id);
 }
-
-// function getLine(){
-//     return gMeme.txt
-// }
