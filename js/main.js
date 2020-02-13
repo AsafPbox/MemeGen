@@ -49,31 +49,37 @@ function showGen(elImg) {
     writeLine()
 }
 
-function drawImg(txt, posX, posY) {
+function drawImg() {
     img = new Image()
     img.src = gCurrentImgSrc;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-        drawText(txt, posX, posY)
+        drawText()
     }
 }
 
-function drawText(text, posX, posY) {
+function drawText() {
     // text = gMeme.lines[0].txt
     gCtx.lineWidth = '2'
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = 'white'
     gCtx.font = gDefaultFontSize.toString() + 'px impact'
     // gCtx.textAlign = 'center'
-    gCtx.fillText(text, posX, posY)
-    gCtx.strokeText(text, posX, posY)
+    gCtx.fillText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
+    gCtx.strokeText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
+    gCtx.fillText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY)
+    gCtx.strokeText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY)
 }
 
 function writeLine() {
     document.querySelector('#topline').addEventListener('keyup', function () {
-            console.log(gMeme.selectedLineIdx)
+        if (gMeme.selectedLineIdx === 0) {
             gMeme.lines[0].txt = this.value;
-            drawImg(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY)
+            drawImg()
+        } else if (gMeme.selectedLineIdx === 1) {
+            gMeme.lines[1].txt = this.value;
+            drawImg()
+        }
     });
 }
 
@@ -81,9 +87,11 @@ function switchLine() {
     document.querySelector('#topline').value = ''
     if (gMeme.selectedLineIdx === 0) {
         gMeme.selectedLineIdx = 1;
+        document.querySelector('input').value = gMeme.lines[1].txt;
     }
     else {
         gMeme.selectedLineIdx = 0;
+        document.querySelector('input').value = gMeme.lines[0].txt;
     }
     console.log('Working on line :', gMeme.selectedLineIdx);
 }
