@@ -26,11 +26,6 @@ a:hover {
     border-radius: 12px;
 }
 
-canvas {
-    display: block;
-    padding: 0px 10px 0px;
-}
-
 .nav-container {
     width: 100%;
     grid-template-columns: 30% 70%;
@@ -75,7 +70,18 @@ canvas {
     grid-template-rows: 100%;
 }
 
+canvas {
+    display: block;
+    padding: 0px 10px 0px;
+}
+
+#my-canvas {
+    width: 300px;
+    /* min-width: 200px; */
+}
+
 .canvas-buttons {
+    min-width: 200px;
     grid-template-columns: repeat(5, 20%);
     grid-template-rows: repeat(5, 20%);
 }
@@ -109,6 +115,10 @@ canvas {
     grid-column: 5 / 6;
     grid-row: 4 / 5 ;
 }
+
+/* #setColor {
+
+} */
 
 #shareMeme {
     grid-column: 1 / 3;
