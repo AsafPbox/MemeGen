@@ -2,7 +2,7 @@
 
 // default values :
 
-var gDefaultFontSize = 40;
+// var gDefaultFontSize = 40;
 var gDefaultFontSizeUpperLine;
 var gDefaultFontSizeLowerLine;
 var gDefaultUpperLinePos = { posX: 50, posY: 50 };
@@ -46,7 +46,9 @@ function showGen(elImg) {
     gMeme.selectedImgId = memeImg.src.split('/')[4].split('.')[0] // need regex
     gCurrentImgSrc = memeImg.src;
     document.querySelector('.image-gallery').style.display = 'none'
-    document.querySelector('.MemeGen').style.display = 'block';
+    document.querySelector('.MemeGen').style.display = 'grid';
+    gDefaultFontSizeUpperLine = 40;
+    gDefaultFontSizeLowerLine = 40;
     drawImg(elImg.src)
     writeLine()
 }
@@ -63,14 +65,24 @@ function drawImg() {
 function drawText() {
     // text = gMeme.lines[0].txt
     gCtx.lineWidth = '2'
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
-    gCtx.font = gDefaultFontSize.toString() + 'px impact'
-    // gCtx.textAlign = 'center'
-    gCtx.fillText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
-    gCtx.strokeText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
-    gCtx.fillText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY)
-    gCtx.strokeText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY)
+    if (getCurrentLine() === 0) {
+        gCtx.fillText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY);
+        gCtx.strokeText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY);
+        gCtx.strokeStyle = 'black'
+        gCtx.fillStyle = 'white'
+        gCtx.font = gDefaultFontSizeUpperLine.toString() + 'px impact';
+        gCtx.fillText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
+        gCtx.strokeText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
+    } else {
+        gCtx.fillText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
+        gCtx.strokeText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
+        gCtx.strokeStyle = 'black'
+        gCtx.fillStyle = 'white'
+        gCtx.font = gDefaultFontSizeLowerLine.toString() + 'px impact'
+        // gCtx.textAlign = 'center'
+        gCtx.fillText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY)
+        gCtx.strokeText(gMeme.lines[1].txt, gDefaultLowerLinePos.posX, gDefaultLowerLinePos.posY)
+    }
 }
 
 function writeLine() {
@@ -95,7 +107,6 @@ function switchLine() {
         gMeme.selectedLineIdx = 0;
         document.querySelector('input').value = gMeme.lines[0].txt;
     }
-    console.log('Working on line :', gMeme.selectedLineIdx);
 }
 
 function getCurrentLine() {
@@ -117,6 +128,7 @@ function moveLineUp() {
         drawImg()
     }
 }
+
 function moveLineDown() {
     if (getCurrentLine() === 0) {
         console.log(gDefaultUpperLinePos.posY)
@@ -133,16 +145,58 @@ function moveLineDown() {
 
 // need to combine both function to one 
 function increaseFontSize() {
-    if (gDefaultFontSize === 55) return;
-    gDefaultFontSize += 5;
-    drawImg()
-    console.log(gDefaultFontSize)
+    if (getCurrentLine() === 0) {
+        if (gDefaultFontSizeUpperLine === 55) return;
+        else {
+            gDefaultFontSizeUpperLine += 1;
+            drawImg()
+        }
+    } else if (getCurrentLine() === 1) {
+        if (gDefaultFontSizeLowerLine === 55) return;
+        else {
+            gDefaultFontSizeLowerLine += 1;
+            drawImg()
+        }
+    }
 }
+
 function decreaseFontSize() {
-    if (gDefaultFontSize === 35) return;
-    gDefaultFontSize -= 5;
-    drawImg()
-    console.log(gDefaultFontSize)
+    if (getCurrentLine() === 0) {
+        if (gDefaultFontSizeUpperLine === 35) return;
+        else {
+            gDefaultFontSizeUpperLine -= 1;
+            drawImg()
+        }
+    } else if (getCurrentLine() === 1) {
+        if (gDefaultFontSizeLowerLine === 35) return;
+        else {
+            gDefaultFontSizeLowerLine -= 1;
+            drawImg()
+        }
+    }
+}
+
+function saveMeme() {
+    console.log('saveMeme');
+}
+
+function shareMeme() {
+    console.log('shareMeme');
+}
+
+function openGallery() {
+    document.querySelector('.image-gallery').style.display = 'grid';
+    document.querySelector('.MemeGen').style.display = 'none';
+}
+
+function openGenerator() { // note : need to continue;
+    document.querySelector('.image-gallery').style.display = 'none'
+    document.querySelector('.MemeGen').style.display = 'grid';
+    if (gCurrentImgSrc === undefined) {
+        gCurrentImgSrc = document.querySelectorAll('img')[0].src;
+        drawImg(gCurrentImgSrc)
+        writeLine()
+    };
 }
 
 // TRASH

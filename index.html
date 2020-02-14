@@ -10,12 +10,12 @@
 
 <body onload="init()">
 
-    <nav class="nav-container grid"> 
-        <div class="logo">Basic MemeGenerator</div>
+    <nav class="nav-container grid">
+        <div class="logo">MemeGenerator</div>
         <ul class="nav-buttons grid">
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Generator</a></li>
-            <li><a href="#">About</a></li>
+            <li><a onclick="openGallery()" href="#">Gallery</a></li>
+            <li><a onclick="openGenerator()" href="#">Generator</a></li>
+            <li><a onclick="openAbout()" href="#">About</a></li>
         </ul>
     </nav>
 
@@ -25,22 +25,24 @@
             <img src="img/2.jpg" class="image" id="img2" onclick="showGen(this)">
         </div>
 
-        <div class="MemeGen grid" style="display: none">
-            <div class="canvas-buttons grid">
-                <button onclick="switchLine()">Switch Line</button>
-                <button onclick="moveLineUp()">Move UP</button>
-                <button onclick="moveLineDown()">Move Down</button>
-                <button onclick="increaseFontSize()">Font Size +</button>
-                <button onclick="decreaseFontSize()">Font Size -</button>
-                <input type="text" id="topline" name="topline" placeholder="Enter text here">
-            </div>
+        <div class="MemeGen" style="display: none">
             <div class="canvas-container">
-            <canvas id="my-canvas" height="550" width="550" style="border: 1px solid black;"></canvas>
+                <canvas id="my-canvas" height="550" width="550"></canvas>
+            </div>
+            <div class="canvas-buttons grid">
+                <input type="text" id="topline" name="topline" placeholder="Enter text here">
+                <button id="switchLine" onclick="switchLine()">Switch Line</button>
+                <button id="moveLineUp" onclick="moveLineUp()">Move UP</button>
+                <button id="moveLineDown" onclick="moveLineDown()">Move Down</button>
+                <button id="increaseFontSize" onclick="increaseFontSize()">Font Size +</button>
+                <button id="decreaseFontSize" onclick="decreaseFontSize()">Font Size -</button>
+                <button id="shareMeme" onclick="shareMeme()">Share</button>
+                <button id="saveMeme" onclick="saveMeme()">Save</button>
             </div>
         </div>
     </div>
 
-    <footer class="grid">AP</footer>
+    <footer><a href="https://www.linkedin.com/in/asaf-peretz-b367a1ab">AP Corp</a></footer>
 
     <script src="js/memeService.js"></script>
     <script src="js/main.js"></script>
