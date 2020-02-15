@@ -22,23 +22,32 @@ var gMeme = {
         {
             txt: '',
             size: gDefaultFontSizeUpperLine,
-            align: '',
+            align: 'center',
             color: '#ffffff'
         },
         {
             txt: '',
             size: gDefaultFontSizeLowerLine,
-            align: '',
+            align: 'center',
             color: '#ffffff'
         }
     ]
 };
 
-// stuck on second line mix
-
 function init() {
+    renderGallery()
     gCanvas = document.getElementById('my-canvas');
     gCtx = gCanvas.getContext('2d');
+}
+
+function renderGallery() {
+    var gallery = gImgs;
+    var strHTMLs = gallery.map(function (img){
+        return `
+        <img src=${img.url} class="image" id="img${img.id}" onclick="showGen(this)">`
+    })
+    var elGalleryList = document.querySelector('.image-gallery');
+    elGalleryList.innerHTML = strHTMLs.join('');
 }
 
 function showGen(elImg) {
@@ -64,13 +73,13 @@ function drawImg() {
 
 function drawText() {
     gCtx.lineWidth = '2';
-        // gCtx.strokeStyle = 'black'
+    // gCtx.strokeStyle = 'black'
     gCtx.fillStyle = gMeme.lines[0].color;
     gCtx.textAlign = gMeme.lines[0].align
     gCtx.font = gDefaultFontSizeUpperLine.toString() + 'px impact';
     gCtx.fillText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
     gCtx.strokeText(gMeme.lines[0].txt, gDefaultUpperLinePos.posX, gDefaultUpperLinePos.posY);
-        
+
     gCtx.fillStyle = gMeme.lines[1].color;
     gCtx.textAlign = gMeme.lines[1].align
     gCtx.font = gDefaultFontSizeLowerLine.toString() + 'px impact';
@@ -194,15 +203,15 @@ function openGenerator() { // note : need to continue;
     };
 }
 
-function onGetColor(){
+function onGetColor() {
     elColorInput = document.querySelector('#setColor');
-    elColorInput.addEventListener('input', function(){
+    elColorInput.addEventListener('input', function () {
         if (getCurrentLine() === 0) gMeme.lines[0].color = elColorInput.value;
-        else {gMeme.lines[1].color = elColorInput.value};
+        else { gMeme.lines[1].color = elColorInput.value };
     })
 }
 
-function onSetAlign(alignId){
+function onSetAlign(alignId) {
     console.log(alignId)
     switch (alignId) {
         case 'setAlignLeft':
@@ -219,7 +228,12 @@ function onSetAlign(alignId){
             break;
     }
     if (getCurrentLine() === 0) gMeme.lines[0].align = align;
-    else {gMeme.lines[1].align = align};
+    else { gMeme.lines[1].align = align };
+}
+
+function downloadMeme(elLink) {
+    var memeContent = gCanvas.toDataURL('image/jpeg');
+    elLink.href = memeContent
 }
 
 // TRASH

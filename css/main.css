@@ -116,9 +116,9 @@ canvas {
     grid-row: 4 / 5 ;
 }
 
-/* #setColor {
-
-} */
+.canvas-buttons a {
+    
+}
 
 #shareMeme {
     grid-column: 1 / 3;
